@@ -5,7 +5,7 @@ How punctual is Sydney Metro, and when and where do delays happen?
 This project analyses three months of real-time Sydney Metro North West Line data
 (April–June 2022, Tallawong to Chatswood) published by Transport for NSW.
 
-> **Status: in progress.** Data collection is done; exploration and modelling are next.
+> **Status: in progress.** Data collection, cleaning and first exploration are done.
 
 ## Data
 
@@ -17,13 +17,29 @@ This project analyses three months of real-time Sydney Metro North West Line dat
   script keeps only the **last prediction for each trip at each stop**, which shrinks a
   day to about 4,500 rows (~360,000 rows for the whole period).
 
-## Early findings
+## Findings so far
 
-- Trains usually arrive about **25 seconds early** and wait at the platform.
-- The number of trips changes by day type: about 346 on weekdays, 375 on Fridays,
+Based on 89 days of real-time data (1 Apr – 30 Jun 2022): about 26,500 trips and 330,000 arrivals.
+
+- **Metro is very punctual.** After cleaning, **89.6%** of arrivals are within 1 minute of the timetable.
+- **Trains usually run slightly early.** The median arrival is about **25 seconds ahead of schedule**,
+  and this barely changes through the day.
+
+  ![Median delay by hour](figures/median_delay_by_hour.png)
+
+- **Dwell time is fixed.** Doors stay open for about **56 seconds** at every station, so dwell
+  time doesn't explain delays.
+- **6.4% of trips were mis-matched in the feed.** 1,699 trips were shifted by about 4 minutes
+  (one peak-hour headway) with almost no variation between stops. That's a train matched to the
+  wrong timetable slot, not a real delay. These cluster on a few days (up to about half of all
+  trips on 7 April) and were removed before calculating punctuality.
+
+  ![Delay distribution showing ±4 minute bumps](figures/delay_distribution.png)
+
+- **Real disruptions are rare but severe.** On the evening of 19 April, four trips ran about
+  1–2 hours late, with the same delay at every stop, which means the trains were held.
+- **Trip counts depend on the day type:** about 346 trips on weekdays, 375 on Fridays,
   fewer on weekends, and public holidays run a Sunday timetable.
-
-*(More to come as the analysis progresses.)*
 
 ## How to run it
 
@@ -35,7 +51,7 @@ This project analyses three months of real-time Sydney Metro North West Line dat
    ```
 3. Download and reduce the data: `python download_metro.py`
    (takes a while; it's safe to stop and re-run)
-4. Open `explore.ipynb` to see the analysis.
+4. Open `table.ipynb` to see the analysis.
 
 ## Files
 
@@ -43,4 +59,5 @@ This project analyses three months of real-time Sydney Metro North West Line dat
 |---|---|
 | `probe_historical.py` | Checks which dates in the archive actually contain data |
 | `download_metro.py` | Downloads April–June 2022 and shrinks each day to one row per trip per stop |
-| `explore.ipynb` | Exploration and charts |
+| `table.ipynb` | Cleaning, exploration and charts |
+| `figures/` | Charts used in this README |
