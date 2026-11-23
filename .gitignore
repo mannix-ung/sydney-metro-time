@@ -1,0 +1,12 @@
+# Secrets: never commit these
+.env
+*.env
+APIKEY.txt
+
+# Downloaded data (large, and anyone can re-download it with the scripts)
+data/
+
+# Python and Jupyter clutter
+__pycache__/
+.ipynb_checkpoints/
+.venv/
