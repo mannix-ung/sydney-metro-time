@@ -19,9 +19,11 @@ This project analyses three months of real-time Sydney Metro North West Line dat
 
 ## Findings so far
 
-Based on 89 days of real-time data (1 Apr – 30 Jun 2022): about 26,500 trips and 330,000 arrivals.
+Based on 89 days of real-time data (1 Apr – 30 Jun 2022): about 26,500 trips and 297,000 arrivals after cleaning.
 
-- **Metro is very punctual.** After cleaning, **89.6%** of arrivals are within 1 minute of the timetable.
+- **Metro is very punctual.** After cleaning, **89.6%** of arrivals are within 1 minute of the timetable
+  and **95.0%** within 5 minutes. When trains are off, they're about twice as likely to be early
+  (6.8% by more than a minute) as late (3.6%).
 - **Trains usually run slightly early.** The median arrival is about **25 seconds ahead of schedule**,
   and this barely changes through the day.
 
@@ -32,7 +34,9 @@ Based on 89 days of real-time data (1 Apr – 30 Jun 2022): about 26,500 trips a
 - **6.4% of trips were mis-matched in the feed.** 1,699 trips were shifted by about 4 minutes
   (one peak-hour headway) with almost no variation between stops. That's a train matched to the
   wrong timetable slot, not a real delay. These cluster on a few days (up to about half of all
-  trips on 7 April) and were removed before calculating punctuality.
+  trips on 7 April) and were removed before calculating punctuality. Almost all are on weekdays,
+  when peak trains run every 4 minutes (Fridays worst, weekends almost none), which supports the
+  headway explanation.
 
   ![Delay distribution showing ±4 minute bumps](figures/delay_distribution.png)
 
