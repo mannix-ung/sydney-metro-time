@@ -1,6 +1,7 @@
 # Secrets: never commit these
 .env
 *.env
+*.lnk
 APIKEY.txt
 
 # Downloaded data (large, and anyone can re-download it with the scripts)
